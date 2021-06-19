@@ -48,9 +48,13 @@ function main() {
     exit 1
   fi
 
+  
   JMETER_HOME="${dir}"
-  export JMETER_HOME
-  export PATH=$PATH:JMETER_HOME/bin
+  echo "-----> JMETER_HOME: ${JMETER_HOME}"  
+  export $JMETER_HOME
+  export PATH=$PATH:$JMETER_HOME/bin
+
+  ls -la $JMETER_HOME
 }
 
 main "${@:-}"
