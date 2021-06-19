@@ -1,5 +1,10 @@
 #!/bin/bash
+set -euo pipefail
 
-echo "supply"
+BUILD_DIR=$1
+CACHE_DIR=$2
+DEPS_DIR=$3
+DEPS_IDX=$4
 
-exit 0
+export BUILDPACK_DIR=`dirname $(readlink -f ${BASH_SOURCE%/*})`
+source "$BUILDPACK_DIR/scripts/install_jmeter.sh"
