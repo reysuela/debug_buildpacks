@@ -38,7 +38,7 @@ function main() {
       exit 1
     fi
 
-    tar xzf "/tmp/jmeter.tgz" -C "${dir} --strip-components 1"
+    tar xzf "/tmp/jmeter.tgz" -C "${dir}" --strip-components 1
     rm "/tmp/jmeter.tgz"
   fi
 
