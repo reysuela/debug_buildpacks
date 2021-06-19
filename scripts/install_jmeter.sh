@@ -33,6 +33,7 @@ function main() {
     local sha
     sha="$(shasum -a 256 /tmp/jmeter.tgz | cut -d ' ' -f 1)"
 
+    echo "-----> Check jmeter SHA256 ${sha}"
     if [[ "${sha}" != "${expected_sha}" ]]; then
       echo "       **ERROR** SHA256 mismatch: got ${sha}, expected ${expected_sha}"
       exit 1
