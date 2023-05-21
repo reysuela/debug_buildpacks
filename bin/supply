@@ -28,11 +28,11 @@ fi
 # If lib folder exist, copy to JMeter lib folder
 if [ -d "${BUILD_DIR}/lib" ]; then
   echo "--> Copying lib folder to JMeter"
-  ls -la ${BUILD_DIR}/lib
   cp -r "${BUILD_DIR}/lib/" "${JMETER_DIR}/lib"
 fi
 
 chmod -R 744 "${JMETER_DIR}/lib/"
+ls -la "${JMETER_DIR}/bin/"
 chmod -R +x "${JMETER_DIR}/bin/*.sh"
 
 # startup.sh - export env vars for app to consume at start up
