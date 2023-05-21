@@ -28,6 +28,7 @@ fi
 # If lib folder exist, copy to JMeter lib folder
 if [ -d "${BUILD_DIR}/lib" ]; then
   echo "--> Copying lib folder to JMeter"
+  ls -la ${BUILD_DIR}/lib
   cp -r "${BUILD_DIR}/lib/*" "${JMETER_DIR}/lib"
 fi
 
