@@ -11,18 +11,20 @@ echo "CACHE_DIR: ${CACHE_DIR}"
 echo "DEPS_DIR: ${DEPS_DIR}"
 echo "DEPS_IDX ${DEPS_IDX}"
 
-JMETER_DIR="/home/vcap/deps/apache-jmeter-5.5"
+JMETER_VERSION=apache-jmeter-5.5
+JMETER_DIR="${DEPS_DIR}/${JMETER_VERSION}"
 
-# Download JMeter
-if [ ! -f "${CACHE_DIR}/apache-jmeter-5.5.tgz" ]; then
-  echo "--> Downloading JMeter 5.5"
-  curl -L https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.5.tgz -o "${CACHE_DIR}/apache-jmeter-5.5.tgz"
+# Download JMeter.
+# The version is hardcoded for now, I'm not sure how to handle passing of values from user
+if [ ! -f "${CACHE_DIR}/${JMETER_VERSION}.tgz" ]; then
+  echo "--> Downloading ${JMETER_VERSION}"
+  curl -L "https://archive.apache.org/dist/jmeter/binaries/${JMETER_VERSION}.tgz" -o "${CACHE_DIR}/${JMETER_VERSION}.tgz"
 fi
 
-# Extract JMeter
+# Extract JMeter to deps dir
 if [ ! -d "${JMETER_DIR}" ]; then
   echo "-->Extracting JMeter"
-  tar -xzf "${CACHE_DIR}/apache-jmeter-5.5.tgz" -C "${DEPS_DIR}"
+  tar -xzf "${CACHE_DIR}/${JMETER_VERSION}.tgz" -C "${DEPS_DIR}"
 fi
 
 # If lib folder exist, copy to JMeter lib folder
@@ -38,5 +40,5 @@ mkdir -p "${BUILD_DIR}/.profile.d"
 
 # startup.sh - export env vars for app to consume at start up
 STARTUP_SCRIPT="${BUILD_DIR}/.profile.d/startup.sh"
-echo "export JMETER_DIR=${JMETER_DIR}" > "${STARTUP_SCRIPT}"
+echo "export JMETER_DIR=/home/vcap/deps/${JMETER_VERSION}" > "${STARTUP_SCRIPT}"
 echo "export PATH=${JMETER_DIR}/bin:${PATH}" >> "${STARTUP_SCRIPT}"
