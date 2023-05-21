@@ -34,6 +34,8 @@ fi
 chmod -R 744 "${JMETER_DIR}/lib/"
 chmod -R 744 "${JMETER_DIR}/bin/"
 
+mkdir -p "${BUILD_DIR}/.profile.d"
+
 # startup.sh - export env vars for app to consume at start up
 STARTUP_SCRIPT="${BUILD_DIR}/.profile.d/startup.sh"
 echo "export JMETER_DIR=${JMETER_DIR}" > "${STARTUP_SCRIPT}"
