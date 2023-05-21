@@ -41,4 +41,4 @@ mkdir -p "${BUILD_DIR}/.profile.d"
 # startup.sh - export env vars for app to consume at start up
 STARTUP_SCRIPT="${BUILD_DIR}/.profile.d/startup.sh"
 echo "export JMETER_DIR=/home/vcap/deps/${JMETER_VERSION}" > "${STARTUP_SCRIPT}"
-echo "export PATH=${JMETER_DIR}/bin:${PATH}" >> "${STARTUP_SCRIPT}"
+echo "export PATH=/home/vcap/deps/${JMETER_VERSION}/bin:${PATH}" >> "${STARTUP_SCRIPT}"
