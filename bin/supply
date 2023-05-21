@@ -40,6 +40,3 @@ mkdir -p "${BUILD_DIR}/.profile.d"
 STARTUP_SCRIPT="${BUILD_DIR}/.profile.d/startup.sh"
 echo "export JMETER_DIR=${JMETER_DIR}" > "${STARTUP_SCRIPT}"
 echo "export PATH=${JMETER_DIR}/bin:${PATH}" >> "${STARTUP_SCRIPT}"
-
-# check jmeter version
-echo "JMeter version: $(jmeter -v)"
