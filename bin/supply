@@ -11,20 +11,20 @@ echo "CACHE_DIR: $CACHE_DIR"
 echo "DEPS_DIR: $DEPS_DIR"
 echo "DEPS_IDX $DEPS_IDX"
 
-# check if JQ exist?
-if ! [ -x "$(command -v jq)" ]; then
-  echo "Error: jq is not installed." >&2
-  exit 1
-fi
+JMETER_DIR=$DEPS_DIR/apache-jmeter-5.5
 
 # Download JMeter
-if [ ! -f $CACHE_DIR/apache-jmeter-5.1.1.tgz ]; then
-  echo "Downloading JMeter"
+if [ ! -f $CACHE_DIR/apache-jmeter-5.5.tgz ]; then
+  echo "--> Downloading JMeter 5.5"
   curl -L https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.5.tgz -o $CACHE_DIR/apache-jmeter-5.5.tgz
 fi
 
 # Extract JMeter
-if [ ! -d $DEPS_DIR/apache-jmeter-5.5 ]; then
-  echo "Extracting JMeter"
+if [ ! -d $JMETER_DIR ]; then
+  echo "-->Extracting JMeter"
   tar -xzf $CACHE_DIR/apache-jmeter-5.5.tgz -C $DEPS_DIR
 fi
+
+# Copy files recursively from lib directory to JMeter lib directory
+echo "--> Copying JMeter libs"
+cp -r $BUILD_DIR/lib/* $JMETER_DIR/lib/
