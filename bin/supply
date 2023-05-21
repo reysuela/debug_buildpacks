@@ -24,7 +24,7 @@ if [ ! -f $CACHE_DIR/apache-jmeter-5.1.1.tgz ]; then
 fi
 
 # Extract JMeter
-if [ ! -d $DEPS_DIR/apache-jmeter-5.1.1 ]; then
+if [ ! -d $DEPS_DIR/apache-jmeter-5.5 ]; then
   echo "Extracting JMeter"
-  tar -xzf $CACHE_DIR/apache-jmeter-5.1.1.tgz -C $DEPS_DIR
+  tar -xzf $CACHE_DIR/apache-jmeter-5.5.tgz -C $DEPS_DIR
 fi
