@@ -1,11 +1,6 @@
 #!/usr/bin/env bash
 set -eo pipefail
 
-# check if jmeter-libs.yml is present
-if [ ! -f jmeter-libs.yml ]; then
-  echo "no Jmeter libs to install."
-fi
-
 # Check if there are jmx files present
 if [ ! -f *.jmx ]; then
   echo "no Jmeter tests to found."

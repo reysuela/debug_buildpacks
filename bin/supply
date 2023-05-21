@@ -1,31 +1,43 @@
 #!/bin/bash
 set -euo pipefail
 
-BUILD_DIR=$1
-CACHE_DIR=$2
-DEPS_DIR=$3
-DEPS_IDX=$4
+BUILD_DIR=${1}
+CACHE_DIR=${2}
+DEPS_DIR=${3}
+DEPS_IDX=${4}
 
-echo "Build DIR: $BUILD_DIR"
-echo "CACHE_DIR: $CACHE_DIR"
-echo "DEPS_DIR: $DEPS_DIR"
-echo "DEPS_IDX $DEPS_IDX"
+echo "Build DIR: ${BUILD_DIR}"
+echo "CACHE_DIR: ${CACHE_DIR}"
+echo "DEPS_DIR: ${DEPS_DIR}"
+echo "DEPS_IDX ${DEPS_IDX}"
 
-JMETER_DIR=$DEPS_DIR/apache-jmeter-5.5
+JMETER_DIR="${DEPS_DIR}/apache-jmeter-5.5"
 
 # Download JMeter
-if [ ! -f $CACHE_DIR/apache-jmeter-5.5.tgz ]; then
+if [ ! -f "${CACHE_DIR}/apache-jmeter-5.5.tgz" ]; then
   echo "--> Downloading JMeter 5.5"
-  curl -L https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.5.tgz -o $CACHE_DIR/apache-jmeter-5.5.tgz
+  curl -L https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.5.tgz -o "${CACHE_DIR}/apache-jmeter-5.5.tgz"
 fi
 
 # Extract JMeter
-if [ ! -d $JMETER_DIR ]; then
+if [ ! -d "${JMETER_DIR}" ]; then
   echo "-->Extracting JMeter"
-  tar -xzf $CACHE_DIR/apache-jmeter-5.5.tgz -C $DEPS_DIR
+  tar -xzf "${CACHE_DIR}/apache-jmeter-5.5.tgz" -C "${DEPS_DIR}"
 fi
 
-# Copy files recursively from lib directory to JMeter lib directory
-echo "--> Copying JMeter libs"
-cp -r $BUILD_DIR/lib/* $JMETER_DIR/lib/
-chmod -R 744 $JMETER_DIR/lib/*
+# If lib folder exist, copy to JMeter lib folder
+if [ -d "${BUILD_DIR}/lib" ]; then
+  echo "--> Copying lib folder to JMeter"
+  cp -r "${BUILD_DIR}/lib/*" "${JMETER_DIR}/lib"
+fi
+
+chmod -R 744 "${JMETER_DIR}/lib/*"
+chmod -R +x "${JMETER_DIR}/bin/*"
+
+# startup.sh - export env vars for app to consume at start up
+STARTUP_SCRIPT="${JMETER_DIR}"
+echo "export JMETER_DIR=${JMETER_DIR}" > "${STARTUP_SCRIPT}"
+echo "export PATH=${JMETER_DIR}/bin:${PATH}" >> "${STARTUP_SCRIPT}"
+
+# check jmeter version
+echo "JMeter version: $(jmeter -v)"
