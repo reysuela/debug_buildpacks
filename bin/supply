@@ -28,3 +28,4 @@ fi
 # Copy files recursively from lib directory to JMeter lib directory
 echo "--> Copying JMeter libs"
 cp -r $BUILD_DIR/lib/* $JMETER_DIR/lib/
+chmod -R 744 $JMETER_DIR/lib/*
