@@ -32,8 +32,7 @@ if [ -d "${BUILD_DIR}/lib" ]; then
 fi
 
 chmod -R 744 "${JMETER_DIR}/lib/"
-ls -la "${JMETER_DIR}/bin/"
-chmod -R +x "${JMETER_DIR}/bin/*.sh"
+chmod -R 744 "${JMETER_DIR}/bin/"
 
 # startup.sh - export env vars for app to consume at start up
 STARTUP_SCRIPT="${JMETER_DIR}"
