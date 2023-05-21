@@ -29,7 +29,7 @@ fi
 if [ -d "${BUILD_DIR}/lib" ]; then
   echo "--> Copying lib folder to JMeter"
   ls -la ${BUILD_DIR}/lib
-  cp -r "${BUILD_DIR}/lib/*" "${JMETER_DIR}/lib"
+  cp -r "${BUILD_DIR}/lib/" "${JMETER_DIR}/lib"
 fi
 
 chmod -R 744 "${JMETER_DIR}/lib/*"
