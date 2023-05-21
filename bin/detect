@@ -1,2 +1,5 @@
-#!/bin/bash
-exit 0
+#!/usr/bin/env bash
+set -eo pipefail
+
+# check if jmeter-libs.yml is present
+
