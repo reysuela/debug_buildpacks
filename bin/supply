@@ -11,7 +11,7 @@ echo "CACHE_DIR: ${CACHE_DIR}"
 echo "DEPS_DIR: ${DEPS_DIR}"
 echo "DEPS_IDX ${DEPS_IDX}"
 
-JMETER_DIR="${DEPS_DIR}/apache-jmeter-5.5"
+JMETER_DIR="/home/vcap/deps/apache-jmeter-5.5"
 
 # Download JMeter
 if [ ! -f "${CACHE_DIR}/apache-jmeter-5.5.tgz" ]; then
