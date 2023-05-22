@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -eo pipefail
 
+echo "Checking user folder.."
+ls -la
 # Check if there are jmx files present
 if [ ! -f *.jmx ]; then
   echo "no Jmeter tests to found."
